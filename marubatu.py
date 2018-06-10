@@ -10,11 +10,29 @@ def get_lines(pos, angle):
 
 
 def get_win_pattern(pos):
-    angles = [2, 3, 4]
-    spos = pos // 3
+    """
+    指定番号での勝利パターンを返す
+    :param pos:
+    :return:
+    """
+    patterns = [
+        0, 1, 2,
+        3, 4, 5,
+        6, 7, 8,
+        0, 3, 6,
+        1, 4, 7,
+        2, 5, 8,
+        0, 4, 8,
+        2, 4, 6
+    ]
+    # TODO: ななめの判定が難しい
+    # 5目とか違い盤面が狭いため、ななめでは値の振れ幅が小さく誤動作する。
+    # 5目も動いているか怪しい
+    # angles = [2, 3, 4]
+    angles = [3]
+    spos = pos // 3 * 3
     patterns = [[spos + i for i in range(3)]]
     for angle in angles:
-
         pattern = get_lines(pos, angle)
         if pattern:
             patterns.append(pattern)
@@ -31,7 +49,7 @@ def get_all_win_pattern():
 
     for pos in range(len_line):
         pattern.extend(get_win_pattern(pos))
-        return pattern
+    return pattern
 
 
 def is_end(game_bord):
@@ -109,6 +127,7 @@ def main():
 if __name__ == '__main__':
     # main()
     hoge = []
+    # print(hoge)
     for p in get_all_win_pattern():
         if p not in hoge:
             hoge.append(p)
