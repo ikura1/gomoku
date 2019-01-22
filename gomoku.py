@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 
 
-class Gomoku(object):
+class Gomoku:
     """
     Gomoku Zeroしたい
     """
@@ -50,7 +49,7 @@ class Gomoku(object):
                 break
 
 
-class GomokuStats(object):
+class GomokuStats:
     """
     ゲームの状況
     """
