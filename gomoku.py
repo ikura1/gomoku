@@ -1,5 +1,7 @@
 import numpy as np
 
+BOARD_LENGTH = 19
+
 
 class Gomoku:
     """
@@ -9,7 +11,9 @@ class Gomoku:
     def __init__(self):
         # 盤の初期化
         self.current_player = 1
-        self.stats = GomokuStats(np.zeros(81, dtype=np.int), self.current_player)
+        self.stats = GomokuStats(
+            np.zeros(BOARD_LENGTH ** 2, dtype=np.int), self.current_player
+        )
         self.history_dict = {1: [], 2: []}
 
     def reset(self):
@@ -127,5 +131,5 @@ class GomokuStats:
 
 
 if __name__ == "__main__":
-    test = Gomoku()
-    test.run()
+    gomoku = Gomoku()
+    gomoku.run()
