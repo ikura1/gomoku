@@ -1,18 +1,20 @@
 import numpy as np
 
+BOARD_LENGTH = 19
+
 
 class Gomoku:
     """
     Gomoku Zeroしたい
     """
+
     def __init__(self):
         # 盤の初期化
         self.current_player = 1
-        self.stats = GomokuStats(np.zeros(81, dtype=np.int),
-                                 self.current_player)
-        self.history_dict = {1: [],
-                             2: []}
-
+        self.stats = GomokuStats(
+            np.zeros(BOARD_LENGTH ** 2, dtype=np.int), self.current_player
+        )
+        self.history_dict = {1: [], 2: []}
 
     def reset(self):
         """
@@ -20,8 +22,7 @@ class Gomoku:
         :return:
         """
         self.current_player = 1
-        self.stats = GomokuStats(np.zeros(81, dtype=np.int),
-                                 self.current_player)
+        self.stats = GomokuStats(np.zeros(81, dtype=np.int), self.current_player)
 
     def turn(self, position):
         """
@@ -38,14 +39,14 @@ class Gomoku:
         """
         ゲームの開始
         """
-        player_input_text = '{c_player}(例: 1): '
+        player_input_text = "{c_player}(例: 1): "
         self.stats.render()
         while True:
             position = input(player_input_text.format(c_player=self.current_player))
             done = self.turn(int(position))
             self.stats.render()
             if done:
-                print('WINNER: {0}'.format(-self.current_player))
+                print("WINNER: {0}".format(-self.current_player))
                 break
 
 
@@ -53,6 +54,7 @@ class GomokuStats:
     """
     ゲームの状況
     """
+
     def __init__(self, board, player, position=0):
         self.board = board
         self.player = player
@@ -79,12 +81,10 @@ class GomokuStats:
         sposition = position // 9 * 9
         lines = [[sposition + i for i in range(9)]]
         angles = [8, 9, 10]
-        lines.extend([self._get_line_numbers(position, angle)
-                      for angle in angles])
-        patterns = [line[i: i + 5]
-                    for line in lines
-                    for i in range(len(line))
-                    if i < 5]
+        lines.extend([self._get_line_numbers(position, angle) for angle in angles])
+        patterns = [
+            line[i : i + 5] for line in lines for i in range(len(line)) if i < 5
+        ]
         return filter(lambda x: position in x, patterns)
 
     def _get_line_numbers(self, position, angle):
@@ -119,17 +119,17 @@ class GomokuStats:
         """
         # print(self.board)
         # return
-        print('-' * 46)
+        print("-" * 46)
         for i in range(9):
-            row = self.board[i * 9: (i + 1) * 9]
-            print('|', end=' ')
+            row = self.board[i * 9 : (i + 1) * 9]
+            print("|", end=" ")
             for col in row:
-                print('{0:02d}'.format(col), '| ', end='')
+                print("{0:02d}".format(col), "| ", end="")
                 # print('|', end='')
-            print('')
-            print('-' * 46)
+            print("")
+            print("-" * 46)
 
 
-if __name__ == '__main__':
-    test = Gomoku()
-    test.run()
+if __name__ == "__main__":
+    gomoku = Gomoku()
+    gomoku.run()
