@@ -120,8 +120,11 @@ class GomokuStats:
         # print(self.board)
         # return
         print("-" * 46)
-        for i in range(9):
-            row = self.board[i * 9 : (i + 1) * 9]
+        row_numbers = [
+            [i * BOARD_LENGTH, (i + 1) * BOARD_LENGTH] for i in range(BOARD_LENGTH)
+        ]
+        for i, j in row_numbers:
+            row = self.board[i:j]
             print("|", end=" ")
             for col in row:
                 print("{0:02d}".format(col), "| ", end="")
