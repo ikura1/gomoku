@@ -7,7 +7,6 @@ name = "pypi"
 numpy = "*"
 
 [dev-packages]
-prospector = "*"
 flake8 = "*"
 black = "*"
 
